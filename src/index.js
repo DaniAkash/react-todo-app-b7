@@ -9,4 +9,4 @@ const $appRoot = document.querySelector("#app");
 ReactDom.render(
   <App/>,
   $appRoot
-)
+);

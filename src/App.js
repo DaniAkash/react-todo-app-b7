@@ -1,7 +1,9 @@
 import React, { Fragment } from "react";
+import Title from "./Components/Title";
+import TaskList from "./Components/TaskList";
 
 const App = () => {
-  
+
   const tasks = [
     {
       text: "Buy Vegetables",
@@ -19,21 +21,8 @@ const App = () => {
 
   return (
     <Fragment>
-      <h1>Todo List!</h1>
-      <pre>{JSON.stringify(tasks)}</pre>
-      {
-        [
-          <p key={0}>Element 1</p>,
-          <p key={1}>Element 2</p>,
-          <p key={2}>Element 3</p>,
-        ]
-      }
-      <h2>List of Tasks</h2>
-      {
-        tasks.map((task, taskIndex) => {
-          return <p key={taskIndex}>{task.text}</p>
-        })
-      }
+      <Title />
+      <TaskList tasks={tasks} />
     </Fragment>
   )
 };
