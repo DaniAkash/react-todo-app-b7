@@ -38,6 +38,20 @@ const App = () => {
     setText("");
   }
 
+  const toggleTask = index => {
+    setTasks(
+      tasks.map((task, taskIndex) => {
+        if(index === taskIndex) {
+          return {
+            ...task,
+            isComplete: !task.isComplete
+          }
+        }
+        return task;
+      })
+    )
+  }
+
   return (
     <Fragment>
       <Title />
@@ -46,7 +60,7 @@ const App = () => {
         textChangeHandler={textChangeHandler}
         addTask={addTask}
       />
-      <TaskList tasks={tasks} />
+      <TaskList tasks={tasks} toggleTask={toggleTask} />
       <TaskStatus tasks={tasks} />
     </Fragment>
   )
