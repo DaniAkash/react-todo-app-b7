@@ -1,11 +1,18 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Title from "./Components/Title";
 import TaskList from "./Components/TaskList";
 import TaskStatus from "./Components/TaskStatus";
 
 const App = () => {
 
-  const tasks = [
+  const [ text, setText ] = useState("");
+
+  const textChangeHandler = event => {
+    event.persist();
+    setText(event.target.value);
+  };
+
+  const [ tasks, setTasks ] = useState([
     {
       text: "Buy Vegetables",
       isComplete: false
@@ -18,13 +25,28 @@ const App = () => {
       text: "Get Supplies",
       isComplete: false
     }
-  ];
+  ]);
+
+  const addTask = () => {
+    const newTask = {
+      text,
+      isComplete: false,
+    };
+
+    setTasks([ ...tasks, newTask ]);
+    setText("");
+  }
 
   return (
     <Fragment>
       <Title />
-      <input type="text" placeholder="Add a new task!" />
-      <button>Add!</button>
+      <input 
+        type="text" 
+        placeholder="Add a new task!" 
+        value={text}
+        onChange={textChangeHandler}
+      />
+      <button onClick={addTask}>Add!</button>
       <TaskList tasks={tasks} />
       <TaskStatus tasks={tasks} />
     </Fragment>
