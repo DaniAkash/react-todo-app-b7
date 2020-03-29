@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import Title from "./Components/Title";
 import TaskList from "./Components/TaskList";
 import TaskStatus from "./Components/TaskStatus";
+import AddTaskField from "./Components/AddTaskField";
 
 const App = () => {
 
@@ -40,13 +41,11 @@ const App = () => {
   return (
     <Fragment>
       <Title />
-      <input 
-        type="text" 
-        placeholder="Add a new task!" 
-        value={text}
-        onChange={textChangeHandler}
+      <AddTaskField 
+        text={text}
+        textChangeHandler={textChangeHandler}
+        addTask={addTask}
       />
-      <button onClick={addTask}>Add!</button>
       <TaskList tasks={tasks} />
       <TaskStatus tasks={tasks} />
     </Fragment>
