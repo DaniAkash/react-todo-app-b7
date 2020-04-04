@@ -1,4 +1,5 @@
 import React from "react";
+import Task from "./Task";
 
 const TaskList = ({ tasks, toggleTask, deleteTask }) => {
   return tasks.map((task, taskIndex) => {
@@ -11,15 +12,12 @@ const TaskList = ({ tasks, toggleTask, deleteTask }) => {
     };
 
     return (
-      <p key={taskIndex}>
-        <input
-          type="checkbox"
-          checked={task.isComplete}
-          onChange={onClickCheckBox}
-        />
-        {task.text}
-        <button onClick={onClickDelete}>🗑</button>
-      </p>
+      <Task
+        key={taskIndex}
+        task={task}
+        onClickDelete={onClickDelete}
+        onClickCheckBox={onClickCheckBox}
+      />
     );
   });
 };

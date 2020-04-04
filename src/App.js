@@ -5,12 +5,18 @@ import TaskStatus from "./Components/TaskStatus";
 import AddTaskField from "./Components/AddTaskField";
 
 const App = () => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState(
+    window.localStorage.getItem("task-text") || ""
+  );
 
   const textChangeHandler = event => {
     event.persist();
     setText(event.target.value);
   };
+
+  useEffect(() => {
+    window.localStorage.setItem("task-text", text);
+  });
 
   const [tasks, setTasks] = useState([
     {
@@ -54,16 +60,6 @@ const App = () => {
       })
     );
   };
-
-  useEffect(() => {
-    // The code here will execute based on the
-    // app's lifecycle
-    /**
-     * Gets executed at
-     * componentDidMount & componentDidUpdate
-     */
-    // debugger;
-  });
 
   return (
     <Fragment>
