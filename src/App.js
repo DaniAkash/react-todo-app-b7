@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useRef } from "react";
 import Title from "./Components/Title";
 import TaskList from "./Components/TaskList";
 import TaskStatus from "./Components/TaskStatus";
@@ -6,6 +6,8 @@ import AddTaskField from "./Components/AddTaskField";
 import loadTasks from "./utils/loadTasks";
 
 const App = () => {
+  const $inputText = useRef(null);
+
   const [text, setText] = useState(
     window.localStorage.getItem("task-text") || ""
   );
@@ -37,6 +39,15 @@ const App = () => {
         );
       })
       .catch(console.error);
+  }, []);
+
+  /**
+   * DidMount for doing focus on input field
+   */
+  useEffect(() => {
+    if ($inputText.current) {
+      $inputText.current.focus();
+    }
   }, []);
 
   const [tasks, setTasks] = useState([
@@ -89,6 +100,7 @@ const App = () => {
         text={text}
         textChangeHandler={textChangeHandler}
         addTask={addTask}
+        inputRef={$inputText}
       />
       <TaskList tasks={tasks} deleteTask={deleteTask} toggleTask={toggleTask} />
       <TaskStatus tasks={tasks} />
